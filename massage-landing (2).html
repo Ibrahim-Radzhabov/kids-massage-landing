@@ -79,9 +79,12 @@ nav.scrolled{background:rgba(250,247,242,.92);backdrop-filter:blur(20px);box-sha
 .btn-secondary:hover{background:var(--sand-light);color:var(--text)}
 .btn-call{background:rgba(200,168,130,.1)}
 
-/* Hero illustration area */
-.hero-illustration{display:flex;align-items:center;justify-content:center;position:relative}
-.hero-illustration svg{width:100%;max-width:480px;height:auto}
+/* Hero media area */
+.hero-video-wrap{display:flex;align-items:center;justify-content:center;position:relative;width:100%;max-width:380px;margin:0 0 0 auto}
+.hero-video-wrap::before{content:'';position:absolute;inset:-12px;background:linear-gradient(135deg,rgba(125,155,118,.25) 0%,rgba(200,168,130,.2) 100%);border-radius:28px;opacity:.8;filter:blur(24px);z-index:0;pointer-events:none}
+.hero-video-wrap video{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:24px;z-index:2;position:relative;opacity:0;filter:sepia(12%) contrast(92%) brightness(98%);transition:opacity .8s ease}
+.hero-video-wrap video.is-ready{opacity:1}
+.hero-video-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(212,228,208,.42) 0%,rgba(255,255,255,.82) 44%,rgba(232,216,196,.38) 100%);border-radius:24px;border:1px solid rgba(255,255,255,.55);box-shadow:0 24px 48px rgba(200,168,130,.12);z-index:1;pointer-events:none}
 
 /* ─── BREATHING WAVE (Signature) ─── */
 .wave-divider{width:100%;overflow:hidden;line-height:0;position:relative;height:80px;pointer-events:none}
@@ -166,7 +169,8 @@ nav.scrolled{background:rgba(250,247,242,.92);backdrop-filter:blur(20px);box-sha
 .proc-desc{font-size:13px;font-weight:300;color:var(--dim);line-height:1.7}
 
 /* ─── TESTIMONIALS ─── */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.reviews-layout{display:grid;grid-template-columns:minmax(320px,.95fr) minmax(0,1.05fr);gap:28px;margin-top:48px;align-items:start}
+.testi-grid{display:grid;grid-template-columns:1fr;gap:20px}
 .testi-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:36px 30px;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative}
 .testi-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(44,42,38,.06);border-color:var(--sage-light)}
 .testi-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:linear-gradient(to bottom,var(--sage),var(--sand));border-radius:3px 0 0 3px;transition:height .4s ease}
@@ -175,13 +179,23 @@ nav.scrolled{background:rgba(250,247,242,.92);backdrop-filter:blur(20px);box-sha
 .testi-txt{font-size:15px;font-weight:300;font-style:italic;color:var(--dim);line-height:1.8;margin-bottom:24px}
 .testi-author{font-weight:600;font-size:14px;color:var(--text)}
 .testi-meta{font-size:12px;color:var(--dim);margin-top:2px}
+.review-form{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px 28px;box-shadow:0 12px 34px rgba(44,42,38,.05);position:relative;overflow:hidden}
+.review-form::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--sand),var(--sage));border-radius:3px 3px 0 0}
+.review-form-title{font-family:'Lora',serif;font-weight:700;font-size:26px;line-height:1.2;color:var(--text);margin-bottom:10px}
+.review-form-text{font-size:15px;color:var(--dim);line-height:1.8;margin-bottom:24px;max-width:420px}
+.review-form .form-row{margin-bottom:14px}
+.review-submit{margin-top:10px}
+.review-empty{border:1px dashed rgba(125,155,118,.28);border-radius:16px;padding:28px 24px;color:var(--dim);background:rgba(255,255,255,.45)}
+.review-empty-title{font-family:'Lora',serif;font-size:21px;font-weight:700;color:var(--text);margin-bottom:8px}
+.review-status{margin-top:14px;font-size:13px;color:var(--sage-dark);font-weight:600;display:none}
+.review-status.show{display:block}
 
 /* ─── PRICING ─── */
 .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
 .price-card{border:1px solid var(--border);border-radius:12px;padding:32px 22px;text-align:center;transition:transform .3s,box-shadow .3s,border-color .3s;background:var(--white)}
 .price-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(44,42,38,.06);border-color:var(--sage)}
 .price-card.featured{border:2px solid var(--sage);position:relative}
-.price-card.featured::before{content:'Популярно';position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:600;padding:3px 14px;background:var(--sage);color:var(--white);border-radius:12px;white-space:nowrap}
+.price-card.featured::before{content:'Часто выбирают';position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:600;padding:3px 14px;background:var(--sage);color:var(--white);border-radius:12px;white-space:nowrap}
 .price-name{font-family:'Lora',serif;font-weight:600;font-size:17px;color:var(--text);margin-bottom:4px}
 .price-amount{font-family:'Lora',serif;font-weight:700;font-size:34px;color:var(--sage);margin:14px 0}
 .price-amount span{font-size:16px;font-weight:400;color:var(--dim)}
@@ -245,7 +259,7 @@ nav.scrolled{background:rgba(250,247,242,.92);backdrop-filter:blur(20px);box-sha
 .contacts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
 .contact-card{border:1px solid var(--border);border-radius:12px;padding:28px 24px;display:flex;align-items:flex-start;gap:16px;transition:border-color .3s,transform .3s,box-shadow .3s;background:var(--white)}
 .contact-card:hover{border-color:var(--sage);transform:translateY(-3px);box-shadow:0 8px 24px rgba(44,42,38,.05)}
-.contact-card-call{border-color:rgba(125,155,118,.22);background:linear-gradient(180deg,rgba(212,228,208,.28),rgba(255,255,255,1))}
+.contact-card-primary{border-color:rgba(125,155,118,.22);background:linear-gradient(180deg,rgba(212,228,208,.28),rgba(255,255,255,1))}
 .contact-ico-wrap{width:40px;height:40px;border-radius:10px;background:var(--sage-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .contact-ico-wrap svg{width:18px;height:18px;color:var(--sage)}
 .contact-label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
@@ -266,11 +280,12 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;margin-bottom:32px}
 .footer-logo{font-family:'Lora',serif;font-weight:700;font-size:18px;color:var(--text)}
 .footer-logo span{color:var(--sage)}
-.footer-tagline{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6}
+.footer-tagline{font-size:13px;color:var(--dim);margin-top:12px;line-height:1.6;max-width:300px}
 .footer-col-title{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links{display:flex;flex-direction:column;gap:8px;list-style:none}
 .footer-links a{font-size:13px;color:var(--dim);text-decoration:none;transition:color .3s}
 .footer-links a:hover{color:var(--sage)}
+.float-hidden{opacity:0!important;pointer-events:none;transform:translateY(20px) scale(.9)!important}
 .footer-bottom{max-width:1100px;margin:0 auto;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .footer-copy{font-size:12px;color:var(--dim)}
 .footer-privacy{font-size:12px;color:var(--dim);text-decoration:none;transition:color .3s}
@@ -289,13 +304,13 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
   .hero-inner{grid-template-columns:1fr;text-align:center}
   .hero-content{max-width:600px;margin:0 auto}
   .hero-ctas{justify-content:center}
-  .hero-illustration{margin-top:20px}
-  .hero-illustration svg{max-width:280px}
+  .hero-video-wrap{margin-top:30px;max-width:320px}
   .ind-grid{grid-template-columns:1fr 1fr}
   .spec-grid{grid-template-columns:1fr}
   .spec-portrait{max-width:360px;margin:0 auto}
   .proc-grid{grid-template-columns:repeat(3,1fr)}
   .proc-step:nth-child(n+4)::after{display:none}
+  .reviews-layout{grid-template-columns:1fr}
   .testi-grid{grid-template-columns:1fr}
   .price-grid{grid-template-columns:1fr 1fr}
   .book-grid{grid-template-columns:1fr}
@@ -313,6 +328,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
   .spec-stats{grid-template-columns:1fr}
   .float-call,.float-wa{display:none}
   .mobile-quickbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:16px;right:16px;bottom:16px;z-index:401;padding:10px;border-radius:18px;background:rgba(250,247,242,.9);backdrop-filter:blur(18px);border:1px solid rgba(44,42,38,.08);box-shadow:0 10px 30px rgba(44,42,38,.1)}
+  .review-form{padding:28px 22px}
 }
 @media(max-width:480px){
   .proc-grid{grid-template-columns:1fr}
@@ -379,56 +395,18 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
   <div class="hero-bg"></div>
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-tag reveal">Детский массажист · Махачкала</div>
+      <div class="hero-tag reveal">С заботой о самом важном</div>
       <h1 class="hero-h1 reveal">Нежные руки,<br>которым <em>доверяют</em> мамы</h1>
-      <p class="hero-sub reveal">Вы переживаете за малыша — и это нормально. Я помогу разобраться, что происходит, и мягко направлю развитие ребёнка в здоровое русло. <strong>Бережно, с любовью, с медицинским подходом.</strong></p>
+      <p class="hero-sub reveal">Детский массажист в Махачкале с медицинским образованием. Работаю с детьми от 1 месяца до 7 лет <strong>бережно и с заботой.</strong></p>
       <div class="hero-ctas reveal">
         <a href="#booking" class="btn-primary"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Бесплатная консультация</a>
-        <a href="tel:+79991234567" class="btn-secondary btn-call">Позвонить сейчас</a>
         <a href="#process" class="btn-secondary">Как проходит сеанс</a>
       </div>
     </div>
-    <div class="hero-illustration reveal">
-      <svg viewBox="0 0 500 460" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation" aria-hidden="true">
-        <!-- Layered organic illustration: hands cradling warmth -->
-        <defs>
-          <radialGradient id="glow1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D4E4D0" stop-opacity=".6"/><stop offset="100%" stop-color="#D4E4D0" stop-opacity="0"/></radialGradient>
-          <radialGradient id="glow2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E8D8C4" stop-opacity=".4"/><stop offset="100%" stop-color="#E8D8C4" stop-opacity="0"/></radialGradient>
-          <linearGradient id="handL" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7D9B76" stop-opacity=".6"/><stop offset="100%" stop-color="#7D9B76" stop-opacity=".2"/></linearGradient>
-          <linearGradient id="handR" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#C8A882" stop-opacity=".5"/><stop offset="100%" stop-color="#C8A882" stop-opacity=".15"/></linearGradient>
-        </defs>
-        <!-- Ambient glow layers -->
-        <ellipse cx="250" cy="230" rx="140" ry="120" fill="url(#glow1)"/>
-        <ellipse cx="260" cy="240" rx="100" ry="85" fill="url(#glow2)"/>
-        <!-- Core — warm circle (the child) -->
-        <circle cx="250" cy="225" r="60" fill="#D4E4D0" opacity=".35"/>
-        <circle cx="250" cy="225" r="42" fill="#E8D8C4" opacity=".25"/>
-        <circle cx="250" cy="225" r="24" fill="#FAF7F2" opacity=".3"/>
-        <!-- Left hand (sage) — flowing curves -->
-        <path d="M65 340 C40 280 50 200 100 155 C130 130 165 120 195 140 C215 152 225 175 228 195" stroke="url(#handL)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M80 350 C60 300 68 225 110 175 C140 145 175 135 200 152" stroke="#7D9B76" stroke-width="1.2" stroke-linecap="round" fill="none" opacity=".3"/>
-        <path d="M55 330 C38 270 55 185 115 140" stroke="#7D9B76" stroke-width="1" stroke-linecap="round" fill="none" opacity=".15" stroke-dasharray="4 6"/>
-        <!-- Right hand (sand) — flowing curves -->
-        <path d="M435 340 C460 280 450 200 400 155 C370 130 335 120 305 140 C285 152 275 175 272 195" stroke="url(#handR)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M420 350 C440 300 432 225 390 175 C360 145 325 135 300 152" stroke="#C8A882" stroke-width="1.2" stroke-linecap="round" fill="none" opacity=".3"/>
-        <path d="M445 330 C462 270 445 185 385 140" stroke="#C8A882" stroke-width="1" stroke-linecap="round" fill="none" opacity=".15" stroke-dasharray="4 6"/>
-        <!-- Bottom cradle arc -->
-        <path d="M110 320 C160 400 340 400 390 320" stroke="#7D9B76" stroke-width="2" stroke-linecap="round" fill="none" opacity=".35"/>
-        <path d="M130 335 C175 395 325 395 370 335" stroke="#C8A882" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".25"/>
-        <path d="M150 345 C190 385 310 385 350 345" stroke="#7D9B76" stroke-width="1" stroke-linecap="round" fill="none" opacity=".12"/>
-        <!-- Tiny heart in center -->
-        <path d="M244 200 C244 193 250 186 256 193 C262 186 268 193 268 200 C268 212 256 222 256 222 C256 222 244 212 244 200Z" fill="#C8A882" opacity=".25"/>
-        <!-- Decorative particles -->
-        <circle cx="130" cy="150" r="3" fill="#7D9B76" opacity=".12"/>
-        <circle cx="370" cy="150" r="3" fill="#C8A882" opacity=".12"/>
-        <circle cx="250" cy="380" r="3" fill="#7D9B76" opacity=".12"/>
-        <circle cx="170" cy="110" r="2" fill="#C8A882" opacity=".1"/>
-        <circle cx="330" cy="110" r="2" fill="#7D9B76" opacity=".1"/>
-        <circle cx="100" cy="250" r="2" fill="#C8A882" opacity=".08"/>
-        <circle cx="400" cy="250" r="2" fill="#7D9B76" opacity=".08"/>
-        <!-- Orbiting gentle ring -->
-        <circle cx="250" cy="225" r="95" stroke="#7D9B76" stroke-width=".6" fill="none" opacity=".1" stroke-dasharray="3 8"/>
-      </svg>
+    <div class="hero-video-wrap reveal">
+      <video autoplay muted loop playsinline preload="metadata" aria-hidden="true" onloadeddata="this.classList.add('is-ready')">
+        <source src="assets/video/hero_video.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
@@ -452,11 +430,6 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
         <div class="ind-ico-wrap"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M8 20c-.5-3 1-5 4-5s4.5 2 4 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="ind-title">Кривошея</div>
         <div class="ind-desc">Специальные приёмы расслабляют мышцы шеи. Регулярный курс приводит к полной коррекции.</div>
-      </div>
-      <div class="ind-card reveal">
-        <div class="ind-ico-wrap"><svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="14" rx="6" ry="5" stroke="currentColor" stroke-width="1.5"/><path d="M9 10V7M15 10V7M12 8V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="ind-title">Колики</div>
-        <div class="ind-desc">Лёгкий массаж животика снимает спазмы. Ребёнок спокойнее, а мама — отдохнувшей.</div>
       </div>
       <div class="ind-card reveal">
         <div class="ind-ico-wrap"><svg viewBox="0 0 24 24" fill="none"><path d="M4 18l4-6 3 3 3-9 3 6 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -512,17 +485,14 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 <section class="section section-breathe" id="specialist">
   <div class="section-inner">
     <div class="sec-tag reveal">О проекте</div>
-    <h2 class="sec-h2 reveal">Кроха <em>и Я</em></h2>
+    <h2 class="sec-h2 reveal" style="max-width: 700px;">Детский массажист с <em>медицинским</em> образованием</h2>
     <div class="spec-grid">
       <div class="spec-portrait reveal">
         <div class="spec-portrait-bg"></div>
-        <video class="spec-media" autoplay muted loop playsinline preload="metadata" poster="assets/images/about-me-poster.png" aria-hidden="true">
-          <source src="assets/video/about-me.mp4" type="video/mp4">
-        </video>
       </div>
       <div>
-        <p class="reveal" style="font-size:16px;color:var(--dim);line-height:1.8">Детский массажист с медицинским образованием. Работаю с малышами от 1 месяца до 7 лет. Каждого ребёнка воспринимаю как уникального — и подбираю программу именно под его потребности.</p>
-        <div class="spec-stats reveal">
+        <p class="reveal" style="font-size:17px;color:var(--dim);line-height:1.8;max-width:580px;">Детский массажист в Махачкале с медицинским образованием. Работаю с детьми от 1 месяца до 7 лет, подбирая программу с учетом возраста, состояния ребенка и рекомендаций врача.</p>
+        <div class="spec-stats reveal" style="margin: 36px 0;">
           <div class="spec-stat">
             <div class="spec-stat-ico">
               <svg viewBox="0 0 24 24" fill="none">
@@ -532,7 +502,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
               </svg>
             </div>
             <div class="spec-stat-title">Медицинское образование</div>
-            <div class="spec-stat-label">Дипломированный специалист</div>
+            <div class="spec-stat-label">Работаю с детьми с учетом возраста, состояния и показаний</div>
           </div>
           <div class="spec-stat">
             <div class="spec-stat-ico">
@@ -542,8 +512,8 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
                 <path d="M8.5 4.8l-1-1.3M15.5 4.8l1-1.3" stroke="currentColor" stroke-width="1.5"/>
               </svg>
             </div>
-            <div class="spec-stat-title">12 лет практики</div>
-            <div class="spec-stat-label">Опыт, которому доверяют</div>
+            <div class="spec-stat-title">Работа с детьми</div>
+            <div class="spec-stat-label">Работаю с малышами и детьми до 7 лет</div>
           </div>
           <div class="spec-stat">
             <div class="spec-stat-ico">
@@ -554,15 +524,14 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
               </svg>
             </div>
             <div class="spec-stat-title">Бережный подход</div>
-            <div class="spec-stat-label">Мягкие техники, мама может быть рядом</div>
+            <div class="spec-stat-label">Мягкие техники, спокойный темп, мама может быть рядом</div>
           </div>
         </div>
-        <blockquote class="spec-quote reveal">Я верю, что массаж — это разговор руками. Ребёнок не понимает слов, но чувствует каждое прикосновение. Моя задача — чтобы это прикосновение было целебным и безопасным.</blockquote>
+        <blockquote class="spec-quote reveal" style="margin-bottom: 28px;">Для меня важно, чтобы каждое прикосновение было не только эффективным, но и безопасным для ребенка.</blockquote>
         <div class="spec-certs reveal">
           <span class="spec-cert">Медицинское образование</span>
           <span class="spec-cert">Детский массаж</span>
-          <span class="spec-cert">Бобат-терапия</span>
-          <span class="spec-cert">Войта-терапия</span>
+          <span class="spec-cert">Бобат- и Войта-подходы</span>
         </div>
       </div>
     </div>
@@ -576,14 +545,14 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 <section class="section section-alt" id="process">
   <div class="section-inner">
     <div class="sec-tag reveal">Как проходит сеанс</div>
-    <h2 class="sec-h2 reveal">Пять шагов к <em>здоровью</em></h2>
-    <p class="sec-p reveal">Каждый визит — спокойный, продуманный процесс.</p>
+    <h2 class="sec-h2 reveal" style="margin-bottom: 28px;">Как проходит <em>сеанс</em></h2>
+    <p class="sec-p reveal" style="max-width: 600px; margin-bottom: 56px; line-height: 1.8;">От знакомства до рекомендаций после сеанса — все спокойно, бережно и с учетом состояния ребенка.</p>
     <div class="proc-grid">
-      <div class="proc-step reveal"><div class="proc-num">1</div><div class="proc-title">Знакомство</div><div class="proc-desc">Обсуждаем ситуацию, осматриваю ребёнка, отвечаю на вопросы</div></div>
-      <div class="proc-step reveal"><div class="proc-num">2</div><div class="proc-title">Подготовка</div><div class="proc-desc">Комфортная температура, мягкая поверхность, спокойная обстановка</div></div>
-      <div class="proc-step reveal"><div class="proc-num">3</div><div class="proc-title">Массаж</div><div class="proc-desc">20–40 минут мягких техник. Мама рядом, всё под контролем</div></div>
-      <div class="proc-step reveal"><div class="proc-num">4</div><div class="proc-title">Рекомендации</div><div class="proc-desc">Упражнения для дома, на что обратить внимание</div></div>
-      <div class="proc-step reveal"><div class="proc-num">5</div><div class="proc-title">План курса</div><div class="proc-desc">Индивидуальный график с учётом возраста и задач</div></div>
+      <div class="proc-step reveal"><div class="proc-num">1</div><div class="proc-title">Знакомство</div><div class="proc-desc" style="line-height: 1.5;">Обсуждаем самочувствие ребенка, осматриваю малыша и отвечаю на вопросы мамы</div></div>
+      <div class="proc-step reveal"><div class="proc-num">2</div><div class="proc-title">Подготовка</div><div class="proc-desc" style="line-height: 1.5;">Комфортная температура, удобная поверхность и спокойное начало сеанса</div></div>
+      <div class="proc-step reveal"><div class="proc-num">3</div><div class="proc-title">Сеанс массажа</div><div class="proc-desc" style="line-height: 1.5;">20–40 минут мягких техник с учетом возраста и состояния ребенка. Мама может быть рядом</div></div>
+      <div class="proc-step reveal"><div class="proc-num">4</div><div class="proc-title">Рекомендации</div><div class="proc-desc" style="line-height: 1.5;">Даю рекомендации после сеанса и подсказываю, на что обратить внимание дома</div></div>
+      <div class="proc-step reveal"><div class="proc-num">5</div><div class="proc-title">План курса</div><div class="proc-desc" style="line-height: 1.5;">Если нужен курс, подбираю график и количество сеансов индивидуально</div></div>
     </div>
   </div>
 </section>
@@ -591,26 +560,26 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 <!-- ═══ REVIEWS ═══ -->
 <section class="section section-breathe" id="reviews">
   <div class="section-inner">
-    <div class="sec-tag reveal">Отзывы мам</div>
-    <h2 class="sec-h2 reveal">Истории <em>доверия</em></h2>
-    <div class="testi-grid">
-      <div class="testi-card reveal">
-        <div class="testi-q">&ldquo;</div>
-        <p class="testi-txt">Дочке поставили гипертонус в 3 месяца. Я очень боялась массажа — представляла, как ребёнок будет плакать. Елена работала так нежно, что Маша уснула на втором сеансе. После курса тонус пришёл в норму.</p>
-        <div class="testi-author">Анна К.</div>
-        <div class="testi-meta">Дочь Маша, 3 мес. · гипертонус</div>
+    <div class="sec-tag reveal">Отзывы</div>
+    <h2 class="sec-h2 reveal">Оставить <em>отзыв</em></h2>
+    <div class="reviews-layout">
+      <div class="review-form reveal">
+        <div class="review-form-title">Поделитесь впечатлением</div>
+        <p class="review-form-text">Если вы уже были на массаже, отправьте отзыв в WhatsApp. Это честный формат: ничего не публикуется автоматически, а отзыв можно разместить на сайте только после вашего согласия.</p>
+        <a href="https://wa.me/79991234567?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%20%D0%BE%D1%82%D0%B7%D1%8B%D0%B2%20%D0%BE%20%D0%B4%D0%B5%D1%82%D1%81%D0%BA%D0%BE%D0%BC%20%D0%BC%D0%B0%D1%81%D1%81%D0%B0%D0%B6%D0%B5." target="_blank" rel="noopener" class="form-submit review-submit" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">Отправить отзыв в WhatsApp</a>
+        <p class="form-note" style="margin-top:16px;">Можно написать текстом или отправить голосовое сообщение.</p>
       </div>
-      <div class="testi-card reveal">
-        <div class="testi-q">&ldquo;</div>
-        <p class="testi-txt">Сын не переворачивался в 5 месяцев. После 8 сеансов не только перевернулся, но и пополз! Елена каждый раз объясняла, что делает и зачем. Я чувствовала себя спокойно.</p>
-        <div class="testi-author">Ольга М.</div>
-        <div class="testi-meta">Сын Артём, 5 мес. · задержка развития</div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-q">&ldquo;</div>
-        <p class="testi-txt">Обратились с коликами — ночами не спали. Елена показала приёмы для дома. Через неделю мы впервые проспали всю ночь. Бесконечно благодарна.</p>
-        <div class="testi-author">Мария Д.</div>
-        <div class="testi-meta">Сын Лев, 2 мес. · колики</div>
+      <div class="testi-grid reveal">
+        <div class="testi-card">
+          <div class="testi-q">&ldquo;</div>
+          <p class="testi-txt" style="font-style:normal">Отзывы на сайте не появляются автоматически. Сначала вы отправляете сообщение, затем можно согласовать публикацию текста и подписи без лишних данных.</p>
+          <div class="testi-author">Публикация по согласованию</div>
+          <div class="testi-meta">Без спама и без случайной публикации личной информации</div>
+        </div>
+        <div class="review-empty">
+          <div class="review-empty-title">Почему так надёжнее</div>
+          <p>Так проще сохранить доверие к сайту: отзыв проходит через живой контакт, а ваши данные не попадают в открытый доступ без разрешения.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -633,12 +602,12 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
     <div class="sec-tag reveal">Стоимость</div>
     <h2 class="sec-h2 reveal">Прозрачные <em>цены</em></h2>
     <div class="price-grid">
-      <div class="price-card reveal"><div class="price-name">Знакомство</div><div class="price-amount">0 <span>₽</span></div><div class="price-desc">Первая консультация. Осмотр, ответы на вопросы</div><a href="#booking" class="price-cta">Записаться</a></div>
-      <div class="price-card reveal"><div class="price-name">Разовый сеанс</div><div class="price-amount">2 500 <span>₽</span></div><div class="price-desc">30–40 минут массажа с рекомендациями</div><a href="#booking" class="price-cta">Записаться</a></div>
-      <div class="price-card featured reveal"><div class="price-name">Курс 5 сеансов</div><div class="price-amount">11 000 <span>₽</span></div><div class="price-desc">Оптимальный курс. Экономия 1 500 ₽</div><a href="#booking" class="price-cta">Записаться</a></div>
-      <div class="price-card reveal"><div class="price-name">Курс 10 сеансов</div><div class="price-amount">20 000 <span>₽</span></div><div class="price-desc">Полный курс. Экономия 5 000 ₽</div><a href="#booking" class="price-cta">Записаться</a></div>
+      <div class="price-card reveal"><div class="price-name">Первичная консультация</div><div class="price-amount">0 <span>₽</span></div><div class="price-desc">Осмотр, знакомство и ответы на ваши вопросы</div><a href="#booking" class="price-cta">Записаться</a></div>
+      <div class="price-card reveal"><div class="price-name">Разовый сеанс</div><div class="price-amount">от 600 <span>₽</span></div><div class="price-desc">30–40 минут массажа. Стоимость зависит от возраста и запроса</div><a href="#booking" class="price-cta">Записаться</a></div>
+      <div class="price-card featured reveal"><div class="price-name">Курс 5 сеансов</div><div class="price-amount">11 000 <span>₽</span></div><div class="price-desc" style="min-height: 48px;">Подходит для старта и заметной динамики</div><a href="#booking" class="price-cta">Записаться</a></div>
+      <div class="price-card reveal"><div class="price-name">Курс 10 сеансов</div><div class="price-amount">13 000 <span>₽</span></div><div class="price-desc" style="min-height: 48px;">Полный курс при необходимости более длительной работы</div><a href="#booking" class="price-cta">Записаться</a></div>
     </div>
-    <p class="price-note reveal">Первая консультация бесплатная — познакомимся и решим вместе</p>
+    <p class="price-note reveal" style="max-width: 600px; margin: 32px auto 0; line-height: 1.6; text-align: center; color: var(--dim);">Формат и количество сеансов подбираются индивидуально после первого знакомства.</p>
   </div>
 </section>
 
@@ -646,31 +615,31 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 <section class="section section-breathe" id="booking">
   <div class="section-inner">
     <div class="sec-tag reveal">Запись</div>
-    <h2 class="sec-h2 reveal">Давайте <em>познакомимся</em></h2>
+    <h2 class="sec-h2 reveal" style="max-width: 600px;">Давайте познакомимся<br>и обсудим <em>ситуацию</em></h2>
     <div class="book-grid">
       <div class="book-info">
-        <p class="sec-p reveal">Заполните форму — я перезвоню в течение часа. Обсудим вашу ситуацию и решим, нужен ли массаж. Без давления, без обязательств.</p>
+        <p class="sec-p reveal" style="max-width: 440px; margin-bottom: 44px; line-height: 1.6;">Заполните форму — перезвоню в течение часа. Спокойно подскажу, нужен ли массаж вашему ребенку.</p>
         <div class="book-trust reveal">
-          <div class="book-trust-item"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.3"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Первая консультация бесплатно</div>
+          <div class="book-trust-item"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.3"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Первая консультация бесплатна</div>
           <div class="book-trust-item"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.3"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Ответ в течение часа</div>
           <div class="book-trust-item"><svg viewBox="0 0 20 20" fill="none"><path d="M16 8c0 5-6 9-6 9s-6-4-6-9a6 6 0 1112 0z" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/></svg>Выезд на дом по Махачкале</div>
         </div>
       </div>
       <div class="form-wrap reveal" id="formWrap">
         <div id="formContent">
-          <div class="form-title">Запись на знакомство</div>
-          <div class="form-sub">Отвечу в течение часа</div>
+          <div class="form-title">Оставьте контакты</div>
+          <div class="form-sub" style="margin-bottom: 28px;">Свяжусь с вами в течение часа</div>
           <div class="form-row">
             <div class="form-group"><label class="form-label" for="fname">Ваше имя</label><input class="form-input" type="text" id="fname" placeholder="Как вас зовут?"></div>
             <div class="form-group"><label class="form-label" for="phone">Телефон</label><input class="form-input" type="tel" id="phone" placeholder="+7 (___) ___-__-__"></div>
           </div>
           <div class="form-row">
             <div class="form-group"><label class="form-label" for="age">Возраст ребёнка</label><select class="form-select" id="age"><option value="">Выберите</option><option>1–3 месяца</option><option>3–6 месяцев</option><option>6–12 месяцев</option><option>1–3 года</option><option>3–7 лет</option></select></div>
-            <div class="form-group"><label class="form-label" for="concern">Что беспокоит?</label><input class="form-input" type="text" id="concern" placeholder="Необязательно"></div>
+            <div class="form-group"><label class="form-label" for="concern">Что хотите обсудить?</label><input class="form-input" type="text" id="concern" placeholder="Необязательно"></div>
           </div>
-          <div class="form-consent"><input type="checkbox" id="consent"><label for="consent">Я согласен(а) на <a href="#">обработку персональных данных</a></label></div>
+          <div class="form-consent" style="opacity: 0.75;"><input type="checkbox" id="consent"><label for="consent">Я согласен(а) на <a href="#">обработку персональных данных</a></label></div>
           <button class="form-submit" onclick="submitForm()">Записаться на знакомство</button>
-          <p class="form-note">Перезвоню в течение часа. Обсудим — без обязательств.</p>
+          <p class="form-note">Без обязательств — сначала спокойно обсудим ваш запрос.</p>
         </div>
         <div class="form-success" id="formSuccess">
           <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="26" stroke="#7D9B76" stroke-width="1.5"/><path d="M20 30l7 7 13-14" stroke="#7D9B76" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -686,14 +655,15 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 <section class="section section-alt" id="faq">
   <div class="section-inner">
     <div class="sec-tag reveal" style="justify-content:center">Частые вопросы</div>
-    <h2 class="sec-h2 reveal" style="text-align:center">Ответы на ваши <em>вопросы</em></h2>
+    <h2 class="sec-h2 reveal" style="text-align:center; margin-bottom: 24px;">Ответы на ваши <em>вопросы</em></h2>
+    <p class="sec-p reveal" style="max-width: 600px; margin: 0 auto 56px; text-align: center; line-height: 1.6;">Собрали ответы на самые частые вопросы, чтобы вам было спокойнее перед первым сеансом.</p>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">С какого возраста можно делать массаж?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>С 1 месяца жизни. В первые недели использую самые деликатные техники. Чем раньше начать коррекцию — тем быстрее результат.</p></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Будет ли ребёнку больно?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Нет. Я работаю мягко, постоянно слежу за реакцией. Если малыш беспокоится — делаем паузу. Многие дети засыпают во время сеанса.</p></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Как подготовиться к визиту?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Покормите малыша за 40–60 минут до сеанса. Возьмите сменный подгузник и пелёнку. Оденьте ребёнка в удобную одежду, которую легко снять. Если есть заключения врачей — захватите с собой.</p></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Нужно ли направление от врача?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Не обязательно. Можете записаться напрямую. Если нужно направление — подскажу, к кому обратиться.</p></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">В какие районы вы выезжаете?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Выезжаю по всей Махачкале. За пределы города обсуждается индивидуально. Стоимость выезда входит в цену сеанса.</p></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Сколько сеансов нужно?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Для профилактики — 5 сеансов. Для коррекции — 8–10. Обсудим на первой консультации и составим план.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">С какого возраста можно делать массаж?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Работаю с детьми от 1 месяца до 7 лет. Формат сеанса и техники подбираются с учетом возраста и состояния ребенка.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Будет ли ребёнку больно?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Нет, сеанс проходит мягко и спокойно. Для меня важно, чтобы ребенку было безопасно и комфортно.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Нужно ли направление от врача?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Не всегда. Если у вас уже есть рекомендации педиатра, невролога или ортопеда, их можно учесть при работе.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Как подготовиться к визиту?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Достаточно выбрать удобное время, когда ребенок спокоен и не голоден. Остальное подскажу заранее.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Сколько сеансов нужно?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Это зависит от возраста ребенка, запроса и рекомендаций врача. После первого знакомства подскажу, нужен ли курс и в каком формате.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Выезжаете ли вы на дом по Махачкале?<div class="faq-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M2 5l5 4 5-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div></button><div class="faq-a" role="region"><p>Да, работаю с выездом на дом по Махачкале. Подробности можно уточнить при записи.</p></div></div>
     </div>
   </div>
 </section>
@@ -701,25 +671,38 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 <!-- Breathing wave -->
 <div class="wave-divider"><canvas id="wave5"></canvas></div>
 
-<!-- ═══ CONTACTS ═══ -->
+<!-- ═══ CONTACTS / FINAL CTA ═══ -->
 <section class="section section-compact" id="contacts">
   <div class="section-inner">
-    <div class="sec-tag reveal">Контакты</div>
-    <h2 class="sec-h2 reveal">Свяжитесь <em>со мной</em></h2>
+    <div class="sec-tag reveal">Связь</div>
+    <h2 class="sec-h2 reveal" style="margin-bottom:12px;">Расскажите <em>о ситуации</em></h2>
+    <p class="sec-p reveal" style="max-width: 600px; margin-top:24px;">Подскажу, подойдет ли массаж вашему ребенку, и предложу удобное время.</p>
     <div class="contacts-grid">
-      <div class="contact-card contact-card-call reveal">
-        <div class="contact-ico-wrap"><svg viewBox="0 0 18 18" fill="none"><path d="M4 4h3l1.5 3-1.5 1c1 1.5 2.25 2.75 3.75 3.75l1-1.5 3 1.5v3c0 .55-.45 1-1 1C6.58 15.75 2.25 11.42 2.25 5c0-.55.45-1 1-1H4z" stroke="currentColor" stroke-width="1.2"/></svg></div>
-        <div><div class="contact-label">Телефон</div><div class="contact-val"><a href="tel:+79991234567">+7 (999) 123-45-67</a></div><a href="tel:+79991234567" class="contact-action">Позвонить сейчас</a></div>
+      <div class="contact-card contact-card-primary reveal">
+        <div class="contact-ico-wrap"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        <div style="flex:1">
+          <div class="contact-label" style="opacity:0.4; font-size:10px; margin-bottom:2px">WhatsApp</div>
+          <div class="contact-val" style="font-size:13px; color:var(--dim); line-height:1.4; margin-bottom:8px">Быстрый способ задать вопрос и записаться</div>
+          <a href="https://wa.me/79991234567" target="_blank" rel="noopener" class="contact-action" style="margin-top:0; font-size:15px; font-weight:800; letter-spacing:0.01em;">Написать в WhatsApp</a>
+        </div>
       </div>
       <div class="contact-card reveal">
-        <div class="contact-ico-wrap"><svg viewBox="0 0 18 18" fill="none"><path d="M2.5 4.5h13c.55 0 1 .45 1 1v8c0 .55-.45 1-1 1h-13c-.55 0-1-.45-1-1v-8c0-.55.45-1 1-1z" stroke="currentColor" stroke-width="1.2"/><path d="M2 5l7 5 7-5" stroke="currentColor" stroke-width="1.2"/></svg></div>
-        <div><div class="contact-label">Мессенджеры</div><div class="contact-val"><a href="https://wa.me/79991234567" target="_blank" rel="noopener">WhatsApp</a> · Telegram по запросу</div></div>
+        <div class="contact-ico-wrap"><svg viewBox="0 0 18 18" fill="none"><path d="M4 4h3l1.5 3-1.5 1c1 1.5 2.25 2.75 3.75 3.75l1-1.5 3 1.5v3c0 .55-.45 1-1 1C6.58 15.75 2.25 11.42 2.25 5c0-.55.45-1 1-1H4z" stroke="currentColor" stroke-width="1.2"/></svg></div>
+        <div>
+          <div class="contact-label">ТЕЛЕФОН</div>
+          <div class="contact-val" style="font-size:13px; color:var(--dim); line-height:1.4; margin-bottom:8px">Если удобнее обсудить запись голосом<br><a href="tel:+79991234567" style="font-size:15px; color:var(--text); text-decoration:none; display:inline-block; margin-top:4px">+7 (999) 123-45-67</a></div>
+          <a href="tel:+79991234567" class="contact-action" style="color:var(--dim); margin-top:0">Позвонить</a>
+        </div>
       </div>
       <div class="contact-card reveal">
         <div class="contact-ico-wrap"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M9 5v4l3 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-        <div><div class="contact-label">Режим работы</div><div class="contact-val">Пн–Сб: 9:00–19:00<br><span style="font-size:13px;color:var(--dim)">Выезд на дом · Махачкала</span></div></div>
+        <div>
+          <div class="contact-label">ВЫЕЗД НА ДОМ</div>
+          <div class="contact-val">Пн–Сб: 9:00–19:00<br><span style="font-size:13px;color:var(--dim)">По Махачкале</span></div>
+        </div>
       </div>
     </div>
+    <div class="reveal" style="font-size:13px; color:var(--dim); opacity:0.6; margin-top:12px;">Можно написать без обязательной записи — отвечу на вопросы и подскажу, нужен ли массаж в вашем случае.</div>
   </div>
 </section>
 
@@ -727,24 +710,25 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
   <div class="footer-inner">
     <div>
       <div class="footer-logo">Кроха <span>и Я</span></div>
-      <p class="footer-tagline">Детский массажист с медицинским образованием.<br>Выезд на дом по Махачкале.</p>
+      <p class="footer-tagline" style="color:rgba(44,42,38,0.75);">Детский массажист с медицинским образованием. Работаю с детьми от 1 месяца до 7 лет. Выезд на дом по Махачкале.</p>
     </div>
     <div>
-      <div class="footer-col-title">Навигация</div>
+      <div class="footer-col-title" style="color:var(--text);opacity:0.85;">Навигация</div>
       <ul class="footer-links">
-        <li><a href="#indications">Показания</a></li>
-        <li><a href="#specialist">Обо мне</a></li>
-        <li><a href="#process">Как проходит</a></li>
-        <li><a href="#pricing">Цены</a></li>
-        <li><a href="#booking">Записаться</a></li>
+        <li><a href="#indications" style="color:rgba(44,42,38,0.75);">Показания</a></li>
+        <li><a href="#specialist" style="color:rgba(44,42,38,0.75);">Обо мне</a></li>
+        <li><a href="#process" style="color:rgba(44,42,38,0.75);">Как проходит сеанс</a></li>
+        <li><a href="#reviews" style="color:rgba(44,42,38,0.75);">Отзывы</a></li>
+        <li><a href="#pricing" style="color:rgba(44,42,38,0.75);">Цены</a></li>
+        <li><a href="#faq" style="color:rgba(44,42,38,0.75);">FAQ</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">Связаться</div>
+      <div class="footer-col-title" style="color:var(--text);opacity:0.85;">Контакты</div>
       <ul class="footer-links">
-        <li><a href="tel:+79991234567">+7 (999) 123-45-67</a></li>
-        <li><a href="https://wa.me/79991234567" target="_blank" rel="noopener">WhatsApp</a></li>
-        <li><a href="#">Telegram</a></li>
+        <li><a href="https://wa.me/79991234567" target="_blank" rel="noopener" style="color:rgba(44,42,38,0.75);">Написать в WhatsApp</a></li>
+        <li><a href="tel:+79991234567" style="color:rgba(44,42,38,0.75);">Позвонить</a></li>
+        <li><a href="#booking" style="color:rgba(44,42,38,0.75);">Оставить заявку</a></li>
       </ul>
     </div>
   </div>
@@ -771,6 +755,27 @@ document.querySelectorAll('.reveal').forEach((el)=>{
   }
   io.observe(el);
 });
+
+/* Hide floating actions in hero and footer sections */
+const floatObs=new IntersectionObserver(entries=>{
+  const floats=document.querySelectorAll('.float-call, .float-wa');
+  entries.forEach(en=>{
+    if(en.target.id === 'contacts' || en.target.classList.contains('hero')){
+      en.target.dataset.hideFloat = en.isIntersecting ? 'true' : 'false';
+    }
+  });
+  const contactsSec=document.getElementById('contacts');
+  const heroSec=document.querySelector('.hero');
+  const shouldHide = (contactsSec && contactsSec.dataset.hideFloat === 'true') || 
+                     (heroSec && heroSec.dataset.hideFloat === 'true');
+  
+  if(shouldHide) floats.forEach(f=>f.classList.add('float-hidden'));
+  else floats.forEach(f=>f.classList.remove('float-hidden'));
+},{threshold:0.1});
+const contactsSec=document.getElementById('contacts');
+const heroSec=document.querySelector('.hero');
+if(contactsSec) floatObs.observe(contactsSec);
+if(heroSec) floatObs.observe(heroSec);
 
 /* ABOUT VIDEO: keep poster visible until video is ready */
 const specVideo=document.querySelector('.spec-media');
@@ -895,7 +900,7 @@ function submitForm(){
     document.getElementById('formSuccess').classList.add('show');
   }
 }
-document.querySelectorAll('.form-input,.form-select').forEach(el=>{
+document.querySelectorAll('.form-input,.form-select,.form-textarea').forEach(el=>{
   el.addEventListener('focus',()=>el.classList.remove('err'));
 });
 </script>
