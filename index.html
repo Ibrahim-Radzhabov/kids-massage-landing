@@ -137,7 +137,7 @@ nav.scrolled{background:rgba(250,247,242,.92);backdrop-filter:blur(20px);box-sha
 .spec-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center;margin-top:48px}
 .spec-portrait{width:100%;aspect-ratio:4/5;border-radius:16px;position:relative;overflow:hidden;background:var(--bg-alt);border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 46px rgba(44,42,38,.08),0 2px 10px rgba(44,42,38,.04)}
 /* Poster layer stays visible until the video is ready */
-.spec-portrait-bg{position:absolute;inset:0;background-image:linear-gradient(160deg,rgba(212,228,208,.28) 0%,rgba(226,222,214,.1) 40%,rgba(232,216,196,.14) 100%),url('assets/images/about-me-poster.png');background-size:cover;background-position:58% 22%;z-index:0}
+.spec-portrait-bg{position:absolute;inset:0;background-image:linear-gradient(160deg,rgba(212,228,208,.28) 0%,rgba(226,222,214,.1) 40%,rgba(232,216,196,.14) 100%),url('assets/images/poster.png');background-size:cover;background-position:58% 22%;z-index:0}
 .spec-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 22%;display:block;z-index:1;opacity:0;transition:opacity .6s ease}
 .spec-portrait.is-ready .spec-media{opacity:1}
 .spec-portrait::after{content:'';position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(to top,rgba(44,42,38,.18),rgba(44,42,38,0));pointer-events:none;z-index:2}
@@ -170,21 +170,27 @@ nav.scrolled{background:rgba(250,247,242,.92);backdrop-filter:blur(20px);box-sha
 
 /* ─── TESTIMONIALS ─── */
 .reviews-layout{display:grid;grid-template-columns:minmax(320px,.95fr) minmax(0,1.05fr);gap:28px;margin-top:48px;align-items:start}
-.testi-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.testi-grid-dynamic{display:grid;grid-template-columns:1fr;gap:20px}
 .testi-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:36px 30px;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative}
 .testi-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(44,42,38,.06);border-color:var(--sage-light)}
 .testi-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:linear-gradient(to bottom,var(--sage),var(--sand));border-radius:3px 0 0 3px;transition:height .4s ease}
 .testi-card:hover::before{height:100%}
 .testi-q{font-family:'Lora',serif;font-size:48px;color:var(--sand);line-height:1;margin-bottom:12px;opacity:.4}
-.testi-txt{font-size:15px;font-weight:300;font-style:italic;color:var(--dim);line-height:1.8;margin-bottom:24px}
+.testi-txt{font-size:15px;font-weight:300;font-style:italic;color:var(--dim);line-height:1.8;margin-bottom:24px;white-space:pre-wrap}
 .testi-author{font-weight:600;font-size:14px;color:var(--text)}
 .testi-meta{font-size:12px;color:var(--dim);margin-top:2px}
-.review-form{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px 28px;box-shadow:0 12px 34px rgba(44,42,38,.05);position:relative;overflow:hidden}
-.review-form::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--sand),var(--sage));border-radius:3px 3px 0 0}
-.review-form-title{font-family:'Lora',serif;font-weight:700;font-size:26px;line-height:1.2;color:var(--text);margin-bottom:10px}
-.review-form-text{font-size:15px;color:var(--dim);line-height:1.8;margin-bottom:24px;max-width:420px}
-.review-form .form-row{margin-bottom:14px}
-.review-submit{margin-top:10px}
+
+.review-form-container{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px 28px;box-shadow:0 12px 34px rgba(44,42,38,.05);position:relative;overflow:hidden}
+.review-form-container::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--sand),var(--sage));border-radius:3px 3px 0 0}
+.review-form-title{font-family:'Lora',serif;font-weight:700;font-size:26px;line-height:1.2;color:var(--text);margin-bottom:20px}
+.form-group{margin-bottom:16px}
+.review-submit{width:100%;margin-top:10px;cursor:pointer;border:none;font-weight:600;}
+.review-submit:disabled{opacity:0.6;cursor:not-allowed}
+.form-status{margin-top:16px;font-size:14px;padding:10px;border-radius:var(--radius);display:none}
+.form-status.error{display:block;background:#fdf2f2;color:#9b1c1c;border:1px solid #f8d7da}
+.form-status.success{display:block;background:#f3faf7;color:#03543f;border:1px solid #def7ec}
+.loading-reviews{text-align:center;padding:40px;color:var(--dim);font-style:italic}
+
 .review-empty{border:1px dashed rgba(125,155,118,.28);border-radius:16px;padding:28px 24px;color:var(--dim);background:rgba(255,255,255,.45)}
 .review-empty-title{font-family:'Lora',serif;font-size:21px;font-weight:700;color:var(--text);margin-bottom:8px}
 .review-status{margin-top:14px;font-size:13px;color:var(--sage-dark);font-weight:600;display:none}
@@ -353,7 +359,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
   <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.8 3.5 3.1 4.8 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.6 3.2.6.7 0 1.2.5 1.2 1.2V20c0 .7-.5 1.2-1.2 1.2C9.7 21.2 2.8 14.3 2.8 5.8 2.8 5.1 3.3 4.6 4 4.6h3.2c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.2.6 3.2.1.4.1.8-.2 1.2l-2.2 2.2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
 <!-- Floating WhatsApp -->
-<a href="https://wa.me/79285165452" class="float-wa" aria-label="Написать в WhatsApp" target="_blank" rel="noopener">
+<a href="https://wa.me/79285165452?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%B4%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BC%D0%B0%D1%81%D1%81%D0%B0%D0%B6.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B5%D0%B5%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F." class="float-wa" aria-label="Написать в WhatsApp" target="_blank" rel="noopener">
   <span class="float-wa-label">Написать в WhatsApp</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
@@ -362,7 +368,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
     <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.8 3.5 3.1 4.8 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.6 3.2.6.7 0 1.2.5 1.2 1.2V20c0 .7-.5 1.2-1.2 1.2C9.7 21.2 2.8 14.3 2.8 5.8 2.8 5.1 3.3 4.6 4 4.6h3.2c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.2.6 3.2.1.4.1.8-.2 1.2l-2.2 2.2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     Позвонить
   </a>
-  <a href="https://wa.me/79285165452" class="mobile-quickbar-link mobile-quickbar-wa" target="_blank" rel="noopener">
+  <a href="https://wa.me/79285165452?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%B4%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BC%D0%B0%D1%81%D1%81%D0%B0%D0%B6.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B5%D0%B5%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F." class="mobile-quickbar-link mobile-quickbar-wa" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     WhatsApp
   </a>
@@ -375,7 +381,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
   <a href="#reviews" onclick="closeMob()">Отзывы</a>
   <a href="#pricing" onclick="closeMob()">Цены</a>
   <a href="tel:+79285165452" onclick="closeMob()">Позвонить</a>
-  <a href="#booking" onclick="closeMob()">Запись</a>
+  <a href="#contacts" onclick="closeMob()">Связь</a>
 </div>
 <nav id="nav">
   <a href="#" class="nav-logo">Кроха <span>и Я</span></a>
@@ -386,7 +392,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
     <li><a href="#reviews">Отзывы</a></li>
     <li><a href="#pricing">Цены</a></li>
   </ul>
-  <a href="#booking" class="nav-cta">Записаться</a>
+  <a href="#contacts" class="nav-cta">Связаться</a>
   <button class="nav-burger" onclick="toggleMob()"><span></span><span></span><span></span></button>
 </nav>
 
@@ -399,12 +405,12 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
       <h1 class="hero-h1 reveal">Нежные руки,<br>которым <em>доверяют</em> мамы</h1>
       <p class="hero-sub reveal">Детский массажист в Махачкале с медицинским образованием. Работаю с детьми от 3 месяцев до 14 лет <strong>бережно и с заботой.</strong></p>
       <div class="hero-ctas reveal">
-        <a href="#booking" class="btn-primary"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Бесплатная консультация</a>
+        <a href="#contacts" class="btn-primary"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Бесплатная консультация</a>
         <a href="#process" class="btn-secondary">Как проходит сеанс</a>
       </div>
     </div>
     <div class="hero-video-wrap reveal">
-      <video autoplay muted loop playsinline preload="metadata" aria-hidden="true" poster="assets/images/about-me-poster.png" onloadeddata="this.classList.add('is-ready')">
+      <video autoplay muted loop playsinline preload="metadata" aria-hidden="true" poster="assets/images/poster.png" onloadeddata="this.classList.add('is-ready')">
         <source src="assets/video/hero_video.mp4" type="video/mp4">
       </video>
     </div>
@@ -464,7 +470,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 <div class="cta-strip">
   <div class="cta-strip-inner">
     <p>Не уверены, нужен ли массаж?<br>Давайте просто поговорим.</p>
-    <a href="#booking" class="btn-primary">Бесплатная консультация</a>
+    <a href="#contacts" class="btn-primary">Бесплатная консультация</a>
   </div>
 </div>
 
@@ -479,7 +485,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
     <div class="spec-grid">
       <div class="spec-portrait reveal">
         <div class="spec-portrait-bg"></div>
-        <img src="assets/images/about-me-poster.png" alt="Детский массажист" class="spec-media" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 22%;z-index:1;opacity:1;">
+        <img src="assets/images/poster.png" alt="Детский массажист" class="spec-media" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 22%;z-index:1;opacity:1;">
       </div>
       <div>
         <p class="reveal" style="font-size:17px;color:var(--dim);line-height:1.8;max-width:580px;">Детский массажист в Махачкале с медицинским образованием. Работаю с детьми от 3 месяцев до 14 лет, подбирая программу с учетом возраста, состояния ребенка и рекомендаций врача.</p>
@@ -556,22 +562,36 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
     <div class="sec-tag reveal">Отзывы</div>
     <h2 class="sec-h2 reveal">Оставить <em>отзыв</em></h2>
     <div class="reviews-layout">
-      <div class="review-form reveal">
-        <div class="review-form-title">Поделитесь впечатлением</div>
-        <p class="review-form-text">Если вы уже были на массаже, отправьте отзыв в WhatsApp. Это честный формат: ничего не публикуется автоматически, а отзыв можно разместить на сайте только после вашего согласия.</p>
-        <a href="https://wa.me/79285165452?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%20%D0%BE%D1%82%D0%B7%D1%8B%D0%B2%20%D0%BE%20%D0%B4%D0%B5%D1%82%D1%81%D0%BA%D0%BE%D0%BC%20%D0%BC%D0%B0%D1%81%D1%81%D0%B0%D0%B6%D0%B5." target="_blank" rel="noopener" class="form-submit review-submit" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">Отправить отзыв в WhatsApp</a>
-        <p class="form-note" style="margin-top:16px;">Можно написать текстом или отправить голосовое сообщение.</p>
+      <!-- FORM -->
+      <div class="review-form-container reveal">
+        <form id="reviewForm" class="review-form-actual">
+          <div class="review-form-title">Поделитесь впечатлением</div>
+          
+          <div class="form-group">
+            <input type="text" id="rev-name" name="name" class="form-input" placeholder="Ваше имя" required minlength="2" maxlength="60">
+          </div>
+          
+          <div class="form-group">
+            <textarea id="rev-message" name="message" class="form-textarea" placeholder="Ваш отзыв (минимум 10 символов)" required minlength="10" maxlength="1000" style="min-height:120px;"></textarea>
+          </div>
+
+          <!-- Honeypot -->
+          <div style="display:none !important;">
+            <input type="text" name="website" id="rev-website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" id="rev-submit-btn" class="form-submit review-submit">Отправить отзыв</button>
+          
+          <div id="review-status" class="form-status"></div>
+          <p class="form-note" style="margin-top:16px;">Отзыв будет опубликован после проверки.</p>
+        </form>
       </div>
-      <div class="testi-grid reveal">
-        <div class="testi-card">
-          <div class="testi-q">&ldquo;</div>
-          <p class="testi-txt" style="font-style:normal">Отзывы на сайте не появляются автоматически. Сначала вы отправляете сообщение, затем можно согласовать публикацию текста и подписи без лишних данных.</p>
-          <div class="testi-author">Публикация по согласованию</div>
-          <div class="testi-meta">Без спама и без случайной публикации личной информации</div>
-        </div>
-        <div class="review-empty">
-          <div class="review-empty-title">Почему так надёжнее</div>
-          <p>Так проще сохранить доверие к сайту: отзыв проходит через живой контакт, а ваши данные не попадают в открытый доступ без разрешения.</p>
+
+      <!-- LIST -->
+      <div class="testi-column reveal">
+        <div id="reviews-list" class="testi-grid-dynamic">
+          <!-- Reviews will be loaded here -->
+          <div class="loading-reviews">Загрузка отзывов...</div>
         </div>
       </div>
     </div>
@@ -582,7 +602,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
 <div class="cta-strip">
   <div class="cta-strip-inner">
     <p>Готовы сделать первый шаг?<br>Познакомимся — это бесплатно.</p>
-    <a href="#booking" class="btn-primary">Записаться на знакомство</a>
+    <a href="#contacts" class="btn-primary">Связаться</a>
   </div>
 </div>
 
@@ -595,19 +615,19 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
     <div class="sec-tag reveal">Стоимость</div>
     <h2 class="sec-h2 reveal">Прозрачные <em>цены</em></h2>
     <div class="price-grid">
-      <div class="price-card reveal"><div class="price-name">Первичная консультация</div><div class="price-amount">0 <span>₽</span></div><div class="price-desc">Осмотр, знакомство и ответы на ваши вопросы</div><a href="#booking" class="price-cta">Записаться</a></div>
-      <div class="price-card reveal"><div class="price-name">Разовый сеанс</div><div class="price-amount">от 600 <span>₽</span></div><div class="price-desc">30–40 минут массажа. Стоимость зависит от возраста и запроса</div><a href="#booking" class="price-cta">Записаться</a></div>
-      <div class="price-card reveal"><div class="price-name">ЛФК упражнения</div><div class="price-amount">от 800 <span>₽</span></div><div class="price-desc">Лечебная физкультура для укрепления мышц и развития моторики</div><a href="#booking" class="price-cta">Записаться</a></div>
-      <div class="price-card reveal"><div class="price-name">Вакумно-баночная терапия</div><div class="price-amount">от 1 000 <span>₽</span></div><div class="price-desc">Улучшение кровообращения и снятие мышечных зажимов</div><a href="#booking" class="price-cta">Записаться</a></div>
-      <div class="price-card featured reveal"><div class="price-name">Курс 5 сеансов</div><div class="price-amount">11 000 <span>₽</span></div><div class="price-desc" style="min-height: 48px;">Подходит для старта и заметной динамики</div><a href="#booking" class="price-cta">Записаться</a></div>
-      <div class="price-card reveal"><div class="price-name">Курс 10 сеансов</div><div class="price-amount">13 000 <span>₽</span></div><div class="price-desc" style="min-height: 48px;">Полный курс при необходимости более длительной работы</div><a href="#booking" class="price-cta">Записаться</a></div>
+      <div class="price-card reveal"><div class="price-name">Первичная консультация</div><div class="price-amount">0 <span>₽</span></div><div class="price-desc">Осмотр, знакомство и ответы на ваши вопросы</div><a href="#contacts" class="price-cta">Связаться</a></div>
+      <div class="price-card reveal"><div class="price-name">Разовый сеанс</div><div class="price-amount">от 600 <span>₽</span></div><div class="price-desc">30–40 минут массажа. Стоимость зависит от возраста и запроса</div><a href="#contacts" class="price-cta">Связаться</a></div>
+      <div class="price-card reveal"><div class="price-name">ЛФК упражнения</div><div class="price-amount">от 800 <span>₽</span></div><div class="price-desc">Лечебная физкультура для укрепления мышц и развития моторики</div><a href="#contacts" class="price-cta">Связаться</a></div>
+      <div class="price-card reveal"><div class="price-name">Вакумно-баночная терапия</div><div class="price-amount">от 1 000 <span>₽</span></div><div class="price-desc">Улучшение кровообращения и снятие мышечных зажимов</div><a href="#contacts" class="price-cta">Связаться</a></div>
+      <div class="price-card featured reveal"><div class="price-name">Курс 5 сеансов</div><div class="price-amount">11 000 <span>₽</span></div><div class="price-desc" style="min-height: 48px;">Подходит для старта и заметной динамики</div><a href="#contacts" class="price-cta">Связаться</a></div>
+      <div class="price-card reveal"><div class="price-name">Курс 10 сеансов</div><div class="price-amount">13 000 <span>₽</span></div><div class="price-desc" style="min-height: 48px;">Полный курс при необходимости более длительной работы</div><a href="#contacts" class="price-cta">Связаться</a></div>
     </div>
     <p class="price-note reveal" style="max-width: 600px; margin: 32px auto 0; line-height: 1.6; text-align: center; color: var(--dim);">Формат и количество сеансов подбираются индивидуально после первого знакомства.</p>
   </div>
 </section>
 
 <!-- ═══ BOOKING ═══ -->
-<section class="section section-breathe" id="booking">
+<section class="section section-breathe" id="booking" hidden aria-hidden="true">
   <div class="section-inner">
     <div class="sec-tag reveal">Запись</div>
     <h2 class="sec-h2 reveal" style="max-width: 600px;">Давайте познакомимся<br>и обсудим <em>ситуацию</em></h2>
@@ -625,18 +645,22 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
           <div class="form-title">Оставьте контакты</div>
           <div class="form-sub" style="margin-bottom: 28px;">Свяжусь с вами в течение часа</div>
           <div class="form-row">
-            <div class="form-group"><label class="form-label" for="fname">Ваше имя</label><input class="form-input" type="text" id="fname" placeholder="Как вас зовут?"></div>
-            <div class="form-group"><label class="form-label" for="phone">Телефон</label><input class="form-input" type="tel" id="phone" placeholder="+7 (___) ___-__-__"></div>
+            <div class="form-group"><label class="form-label" for="fname">Ваше имя</label><input class="form-input" type="text" id="fname" name="name" placeholder="Как вас зовут?"></div>
+            <div class="form-group"><label class="form-label" for="phone">Телефон</label><input class="form-input" type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__"></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label class="form-label" for="age">Возраст ребёнка</label><select class="form-select" id="age"><option value="">Выберите</option><option>3–6 месяцев</option><option>6–12 месяцев</option><option>1–3 года</option><option>3–7 лет</option><option>7–14 лет</option></select></div>
-            <div class="form-group"><label class="form-label" for="concern">Что хотите обсудить?</label><input class="form-input" type="text" id="concern" placeholder="Необязательно"></div>
+            <div class="form-group"><label class="form-label" for="age">Возраст ребёнка</label><select class="form-select" id="age" name="age"><option value="">Выберите</option><option>3–6 месяцев</option><option>6–12 месяцев</option><option>1–3 года</option><option>3–7 лет</option><option>7–14 лет</option></select></div>
+            <div class="form-group"><label class="form-label" for="concern">Что хотите обсудить?</label><input class="form-input" type="text" id="concern" name="concern" placeholder="Необязательно"></div>
           </div>
-          <div class="form-consent" style="opacity: 0.75;"><input type="checkbox" id="consent"><label for="consent">Я согласен(а) на <a href="#">обработку персональных данных</a></label></div>
-          <button class="form-submit" onclick="submitForm()">Записаться на знакомство</button>
+          <!-- Honeypot -->
+          <div style="display:none !important;">
+            <input type="text" name="website" id="lead-website" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="form-consent" style="opacity: 0.75;"><input type="checkbox" id="consent" checked><label for="consent">Я согласен(а) на <a href="#">обработку персональных данных</a></label></div>
+          <button class="form-submit" id="lead-submit-btn" onclick="submitForm()">Записаться на знакомство</button>
+          <div id="lead-status" class="form-status" style="margin-top:15px; text-align:center;"></div>
           <p class="form-note">Без обязательств — сначала спокойно обсудим ваш запрос.</p>
-        </div>
-        <div class="form-success" id="formSuccess">
+        </div>        <div class="form-success" id="formSuccess">
           <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="26" stroke="#7D9B76" stroke-width="1.5"/><path d="M20 30l7 7 13-14" stroke="#7D9B76" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div class="fs-title">Спасибо!</div>
           <p class="fs-text">Я перезвоню вам в течение часа.<br>Поговорим о вашем малыше.</p>
@@ -678,7 +702,7 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
         <div style="flex:1">
           <div class="contact-label" style="opacity:0.4; font-size:10px; margin-bottom:2px">WhatsApp</div>
           <div class="contact-val" style="font-size:13px; color:var(--dim); line-height:1.4; margin-bottom:8px">Быстрый способ задать вопрос и записаться</div>
-          <a href="https://wa.me/79285165452" target="_blank" rel="noopener" class="contact-action" style="margin-top:0; font-size:15px; font-weight:800; letter-spacing:0.01em;">Написать в WhatsApp</a>
+          <a href="https://wa.me/79285165452?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%B4%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BC%D0%B0%D1%81%D1%81%D0%B0%D0%B6.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B5%D0%B5%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F." target="_blank" rel="noopener" class="contact-action" style="margin-top:0; font-size:15px; font-weight:800; letter-spacing:0.01em;">Написать в WhatsApp</a>
         </div>
       </div>
       <div class="contact-card reveal">
@@ -721,9 +745,9 @@ footer{padding:48px clamp(24px,5vw,64px) 28px;border-top:1px solid var(--border)
     <div>
       <div class="footer-col-title" style="color:var(--text);opacity:0.85;">Контакты</div>
       <ul class="footer-links">
-        <li><a href="https://wa.me/79285165452" target="_blank" rel="noopener" style="color:rgba(44,42,38,0.75);">Написать в WhatsApp</a></li>
+        <li><a href="https://wa.me/79285165452?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%B4%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BC%D0%B0%D1%81%D1%81%D0%B0%D0%B6.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B5%D0%B5%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F." target="_blank" rel="noopener" style="color:rgba(44,42,38,0.75);">Написать в WhatsApp</a></li>
         <li><a href="tel:+79285165452" style="color:rgba(44,42,38,0.75);">Позвонить</a></li>
-        <li><a href="#booking" style="color:rgba(44,42,38,0.75);">Оставить заявку</a></li>
+        <li><a href="#contacts" style="color:rgba(44,42,38,0.75);">Связаться</a></li>
       </ul>
     </div>
   </div>
@@ -869,14 +893,25 @@ if(ph)ph.addEventListener('input',function(){
   if(v.startsWith('7')){let f='+7';if(v.length>1)f+=' ('+v.substring(1,4);if(v.length>=4)f+=') '+v.substring(4,7);if(v.length>=7)f+='-'+v.substring(7,9);if(v.length>=9)f+='-'+v.substring(9,11);this.value=f}
 });
 
-/* FORM with consent validation */
-function submitForm(){
+/* FORM with consent validation & API submit */
+async function submitForm(){
+  const LEADS_API = (() => {
+    if (window.__API_BASE_URL__) return window.__API_BASE_URL__.replace('/reviews', '/leads');
+    const meta = document.querySelector('meta[name="api-base-url"]');
+    if (meta && meta.content) return meta.content.replace('/reviews', '/leads');
+    const localHosts = ['localhost', '127.0.0.1', '::1'];
+    if (localHosts.includes(window.location.hostname)) return 'http://127.0.0.1:3134/api/leads';
+    return '/api/leads';
+  })();
+  const btn = document.getElementById('lead-submit-btn');
+  const status = document.getElementById('lead-status');
+  
   let ok=true;
   ['fname','phone','age'].forEach(id=>{
     const el=document.getElementById(id);
     const val=el.value.trim();
     let invalid=false;
-    if(id==='phone') invalid=val.replace(/\D/g,'').length<11;
+    if(id==='phone') invalid=val.replace(/\D/g,'').length<10;
     else if(id==='age') invalid=!val;
     else invalid=val.length<2;
     if(invalid) ok=false;
@@ -890,14 +925,172 @@ function submitForm(){
     ok=false;
   }
 
-  if(ok){
-    document.getElementById('formContent').style.display='none';
-    document.getElementById('formSuccess').classList.add('show');
+  if(!ok) return;
+
+  // Prepare data
+  const consentEl = document.getElementById('consent');
+  const body = {
+    name: document.getElementById('fname').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    age: document.getElementById('age').value,
+    concern: document.getElementById('concern').value.trim(),
+    consent: consentEl.checked,
+    website: document.getElementById('lead-website').value
+  };
+
+  // UI state
+  btn.disabled = true;
+  btn.textContent = 'Отправка...';
+  status.style.display = 'none';
+  status.className = 'form-status';
+
+  try {
+    const res = await fetch(LEADS_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      document.getElementById('formContent').style.display='none';
+      document.getElementById('formSuccess').classList.add('show');
+    } else {
+      let errMsg = 'Ошибка отправки. Попробуйте позже.';
+      if (data.error === 'rate_limited') errMsg = 'Слишком много заявок. Попробуйте через 10 минут.';
+      else if (data.error === 'validation_error') {
+        errMsg = Object.values(data.details).join('. ');
+      }
+      status.textContent = errMsg;
+      status.classList.add('error');
+      status.style.display = 'block';
+    }
+  } catch (err) {
+    console.error('Lead submit error:', err);
+    status.textContent = 'Ошибка сети. Проверьте соединение.';
+    status.classList.add('error');
+    status.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Записаться на знакомство';
   }
 }
 document.querySelectorAll('.form-input,.form-select,.form-textarea').forEach(el=>{
   el.addEventListener('focus',()=>el.classList.remove('err'));
 });
+/* REVIEWS SYSTEM */
+const API_URL = (() => {
+  if (window.__API_BASE_URL__) return window.__API_BASE_URL__;
+  const meta = document.querySelector('meta[name="api-base-url"]');
+  if (meta && meta.content) return meta.content;
+  const localHosts = ['localhost', '127.0.0.1', '::1'];
+  if (localHosts.includes(window.location.hostname)) return 'http://127.0.0.1:3134/api/reviews';
+  return '/api/reviews';
+})();
+const revList = document.getElementById('reviews-list');
+const revForm = document.getElementById('reviewForm');
+const revStatus = document.getElementById('review-status');
+const revSubmitBtn = document.getElementById('rev-submit-btn');
+
+async function fetchReviews() {
+  try {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    renderReviews(data.items || []);
+  } catch (err) {
+    console.error('Failed to fetch reviews:', err);
+    revList.innerHTML = '<div class="loading-reviews">Не удалось загрузить отзывы. Попробуйте позже.</div>';
+  }
+}
+
+function renderReviews(items) {
+  if (items.length === 0) {
+    revList.innerHTML = '<div class="review-empty"><div class="review-empty-title">Отзывов пока нет</div><p>Будьте первым, кто поделится своим впечатлением!</p></div>';
+    return;
+  }
+  
+  revList.innerHTML = '';
+  items.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'testi-card';
+    
+    const quote = document.createElement('div');
+    quote.className = 'testi-q';
+    quote.innerHTML = '&ldquo;';
+    
+    const text = document.createElement('p');
+    text.className = 'testi-txt';
+    text.textContent = item.message;
+    
+    const author = document.createElement('div');
+    author.className = 'testi-author';
+    author.textContent = item.name;
+    
+    const meta = document.createElement('div');
+    meta.className = 'testi-meta';
+    const date = new Date(item.created_at).toLocaleDateString('ru-RU');
+    meta.textContent = `Опубликовано ${date}`;
+    
+    card.appendChild(quote);
+    card.appendChild(text);
+    card.appendChild(author);
+    card.appendChild(meta);
+    revList.appendChild(card);
+  });
+}
+
+async function submitReview(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(revForm);
+  const body = Object.fromEntries(formData.entries());
+  
+  // Basic UI state
+  revStatus.style.display = 'none';
+  revStatus.className = 'form-status';
+  revSubmitBtn.disabled = true;
+  revSubmitBtn.textContent = 'Отправка...';
+  
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    
+    const data = await res.json();
+    
+    if (res.ok) {
+      revStatus.textContent = 'Отзыв успешно отправлен!';
+      revStatus.classList.add('success');
+      revForm.reset();
+      
+      // Optimistic update: fetch again or add manually
+      // We fetch again to get the latest list including our new one
+      fetchReviews();
+    } else {
+      let errMsg = 'Ошибка при отправке. Попробуйте позже.';
+      if (data.error === 'rate_limited') errMsg = 'Слишком много попыток. Попробуйте через 10 минут.';
+      else if (data.error === 'validation_error') {
+        errMsg = Object.values(data.details).join('. ');
+      }
+      revStatus.textContent = errMsg;
+      revStatus.classList.add('error');
+    }
+  } catch (err) {
+    console.error('Submit error:', err);
+    revStatus.textContent = 'Ошибка сети. Проверьте соединение.';
+    revStatus.classList.add('error');
+  } finally {
+    revStatus.style.display = 'block';
+    revSubmitBtn.disabled = false;
+    revSubmitBtn.textContent = 'Отправить отзыв';
+  }
+}
+
+if (revForm) revForm.addEventListener('submit', submitReview);
+fetchReviews();
 </script>
 </body>
 </html>
