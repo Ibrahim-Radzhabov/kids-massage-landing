@@ -1,2 +1,10 @@
 .playwright-cli/
 output/
+node_modules
+.env
+.env.*
+!.env.example
+data/
+.DS_Store
+assets/.DS_Store
+assets/images/.DS_Store
