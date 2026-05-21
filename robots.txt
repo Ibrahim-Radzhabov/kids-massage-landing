@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /server/
+Disallow: /node_modules/
+Disallow: /data/
+Disallow: /.git/
+Disallow: /.playwright-cli/
+Disallow: /output/
+
+Sitemap: https://baby-massage05.ru/sitemap.xml
+
+# Crawl-delay: 10
